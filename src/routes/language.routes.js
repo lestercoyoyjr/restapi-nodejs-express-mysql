@@ -1,10 +1,8 @@
-import {request, response, Router} from "express";
-import { restart } from "nodemon";
+import { Router } from "express";
+import { methods as languageController } from "../controllers/language.controller";
 
 const router=Router();
 
-router.get("/",(request, response)=>{
-    response.send("Lester Coyoy");
-});
+router.get("/", languageController.getLanguages);
 
 export default router;
