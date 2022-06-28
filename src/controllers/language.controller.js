@@ -54,6 +54,27 @@ const addLanguage = async(req,res)=>{
     }
 };
 
+// UPDATE
+const updateLanguage = async(req,res)=>{
+    try {
+        const {id} = req.params;
+        const {name, programmers} = req.body;
+
+        if(id==undefined || name==undefined || programmers==undefined){
+            res.status(400).json({message:"BAD REQUEST! Please fill all the fields"});
+        }
+
+        const language = {id,name, programmers};
+        const connection = await getConnection();
+        const result =  await connection.query("UPDATE language SET ? WHERE id=?", [language,id]);
+        console.log(result);
+        res.json(result);   
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
+
 // DELETE
 const deleteLanguage = async(req,res)=>{
     try {
@@ -72,5 +93,6 @@ export const methods={
     getLanguages,
     getLanguage,
     addLanguage,
+    updateLanguage,
     deleteLanguage
 };
