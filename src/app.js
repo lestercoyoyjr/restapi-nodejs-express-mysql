@@ -13,6 +13,6 @@ app.set("port", 4000);
 app.use(morgan("dev"));
 
 // Routes
-app.use(languageRoutes);
+app.use("/api/languages",languageRoutes);
 
 export default app;
